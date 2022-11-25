@@ -1,4 +1,4 @@
 ## cpp_static_lib_template
-[![Build Status](https://app.travis-ci.com/mmpaszkowski/cpp_template.svg?branch=master)](https://app.travis-ci.com/mmpaszkowski/cpp_template)
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/1629e78bf45e4ef49760a68b3d756d3f)](https://www.codacy.com/gh/mmpaszkowski/cpp_template/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=mmpaszkowski/cpp_template&amp;utm_campaign=Badge_Grade)
-[![Coverage Status](https://coveralls.io/repos/github/mmpaszkowski/cpp_template/badge.svg?branch=master)](https://coveralls.io/github/mmpaszkowski/cpp_template?branch=master)
+[![Build Status](https://app.travis-ci.com/mmpaszkowski/cpp_static_lib_template.svg?branch=master)](https://app.travis-ci.com/mmpaszkowski/cpp_static_lib_template)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/9a6dd51b5c5d4cada9ff157daa136035)](https://www.codacy.com/gh/mmpaszkowski/cpp_static_lib_template/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=mmpaszkowski/cpp_static_lib_template&amp;utm_campaign=Badge_Grade)
+[![Coverage Status](https://coveralls.io/repos/github/mmpaszkowski/cpp_static_lib_template/badge.svg?branch=master)](https://coveralls.io/github/mmpaszkowski/cpp_static_lib_template?branch=master)
