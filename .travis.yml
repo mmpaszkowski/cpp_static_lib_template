@@ -7,7 +7,7 @@ before_install:
 
 script:
   - cmake -H. -Bbuild
-  - cmake --build build --config Debug --target cpp_template_unit_tests -j2
-  - ./build/tests/cpp_template_unit_tests
+  - cmake --build build --config Debug --target cpp_static_lib_template_unit_tests -j2
+  - ./build/tests/cpp_static_lib_template_unit_tests
 after_success:
   - coveralls --root . -E ".*gtest.*" -E ".*CMakeFiles.*" -E ".*_deps.*" -E ".*tests.*"
