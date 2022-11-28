@@ -17,7 +17,7 @@ if (${ENABLE_WARNINGS})
     target_set_warnings(TARGET ${TEST_MAIN} ENABLE ON AS_ERROR OFF)
 endif ()
 
-add_target_static_analyers(${TEST_MAIN})
+#add_target_static_analyers(${TEST_MAIN})
 
 if (ENABLE_COVERAGE)
     set(COVERAGE_MAIN "coverage")

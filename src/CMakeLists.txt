@@ -23,4 +23,5 @@ if (${ENABLE_WARNINGS})
     target_set_warnings(TARGET ${PROJECT_NAME} ENABLE ON AS_ERROR OFF)
 endif ()
 
-add_target_static_analyers(${PROJECT_NAME})
+
+#add_target_static_analyers(${PROJECT_NAME})
