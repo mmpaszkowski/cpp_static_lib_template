@@ -22,7 +22,7 @@ endif()
 
 option(ENABLE_WARNINGS              "Enable to add warnings to a target." ON)
 option(ENABLE_TESTING               "Enable a Unit Testing build."        ON)
-option(ENABLE_COVERAGE              "Enable a Code Coverage build."       ON)
+option(ENABLE_COVERAGE              "Enable a Code Coverage build."       OFF)
 
 ### CMAKE MODULES
 
