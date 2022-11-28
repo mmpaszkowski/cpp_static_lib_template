@@ -1,46 +1,65 @@
-cmake_minimum_required(VERSION 3.16.8)
+cmake_minimum_required(VERSION 3.16)
 
-# PROJECT
-# name and version
-project(cpp_static_lib_template VERSION 0.0.1 LANGUAGES CXX)
+set(PROJECT_NAME cpp_static_lib_template)
+
+### PROJECT
+
+project(${PROJECT_NAME} VERSION 0.0.1 LANGUAGES CXX)
 
 # Global CMake variables
-set(CMAKE_CXX_STANDARD              20)
+set(CMAKE_CXX_STANDARD              17)
 set(CMAKE_CXX_STANDARD_REQUIRED     ON)
 set(CMAKE_CXX_EXTENSIONS            OFF)
 set(CMAKE_EXPORT_COMPILE_COMMANDS   ON)
 
-# MAIN_PROJECT CHECK
-# determine if cpp_static_lib_template is built as a subproject (using add_subdirectory) or if it is the main project
+### MAIN_PROJECT CHECK
 set(MAIN_PROJECT OFF)
 if (CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
     set(MAIN_PROJECT ON)
 endif()
 
 # OPTIONS
-if(${MAIN_PROJECT})
-    set(CPP_STATIC_LIB_TEMPLATE_BuildTests_INIT ON)
-else()
-    set(CPP_STATIC_LIB_TEMPLATE_BuildTests_INIT OFF)
-endif()
 
-option(CPP_STATIC_LIB_TEMPLATE_BuildTests "Build the unit tests when BUILD_TESTING is enabled." ${CPP_STATIC_LIB_TEMPLATE_BuildTests_INIT})
+option(ENABLE_WARNINGS              "Enable to add warnings to a target." ON)
+option(ENABLE_TESTING               "Enable a Unit Testing build."        ON)
+option(ENABLE_COVERAGE              "Enable a Code Coverage build."       ON)
 
-#
-# CMAKE PLUGINS
-# include cmake plugins
-#
+### CMAKE MODULES
+
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/)
-include(CodeCoverage)
-append_coverage_compiler_flags()
+include(ConfigSafeGuards)
+include(Warnings)
+include(AddGitSubmodule)
 include(FetchContent)
+include(Tools)
+include(LTO)
 
-# SUBDIRECTIORIES
+### EXTERNAL LIBRARIES
+
+FetchContent_Declare(
+    fmt
+    GIT_REPOSITORY https://github.com/fmtlib/fmt.git
+    GIT_TAG 9.1.0
+    GIT_SHALLOW TRUE)
+FetchContent_MakeAvailable(fmt)
+
+### SUB DIRECTORIES
+add_subdirectory(configured)
 add_subdirectory(src)
 
-# TESTS
-# create and configure the unit test target
-if (CPP_STATIC_LIB_TEMPLATE_BuildTests)
+### TESTS
+
+if (ENABLE_TESTING)
+    include(CTest)
+    if (ENABLE_COVERAGE)
+        include(CodeCoverage)
+        append_coverage_compiler_flags()
+    endif()
     add_subdirectory(tests)
 endif()
 
+### INSTALL TARGETS
+
+install(TARGETS ${PROJECT_NAME}
+        ARCHIVE DESTINATION lib
+        LIBRARY DESTINATION lib)

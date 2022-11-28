@@ -1,8 +1,6 @@
-set(TEST_MAIN cpp_static_lib_template_unit_tests)
+set(TEST_MAIN ${PROJECT_NAME}_unit_tests)
 
-set(TEST_SOURCES
-    library.cpp
-    )
+set(TEST_SOURCES library.cpp)
 
 FetchContent_Declare(
         googletest
@@ -12,4 +10,29 @@ FetchContent_MakeAvailable(googletest)
 
 add_executable(${TEST_MAIN} ${TEST_SOURCES})
 
-target_link_libraries(${TEST_MAIN} PUBLIC cpp_static_lib_template GTest::gtest_main)
+target_link_libraries(${TEST_MAIN} PUBLIC ${PROJECT_NAME})
+target_link_libraries(${TEST_MAIN} PRIVATE GTest::gtest_main)
+
+if (${ENABLE_WARNINGS})
+    target_set_warnings(TARGET ${TEST_MAIN} ENABLE ON AS_ERROR OFF)
+endif ()
+
+add_target_static_analyers(${TEST_MAIN})
+
+if (ENABLE_COVERAGE)
+    set(COVERAGE_MAIN "coverage")
+    set(COVERAGE_EXCLUDES
+            "${PROJECT_SOURCE_DIR}/app/*"
+            "${PROJECT_SOURCE_DIR}/cmake/*"
+            "${PROJECT_SOURCE_DIR}/docs/*"
+            "${PROJECT_SOURCE_DIR}/external/*"
+            "${PROJECT_SOURCE_DIR}/tests/*"
+#            "${CONAN_CATCH2_ROOT}/*"
+#            "${CONAN_CXXOPTS_ROOT}/*"
+            "/usr/include/*")
+    setup_target_for_coverage_lcov(
+            NAME ${COVERAGE_MAIN}
+            EXECUTABLE ${TEST_MAIN}
+            DEPENDENCIES ${TEST_MAIN}
+    )
+endif()
