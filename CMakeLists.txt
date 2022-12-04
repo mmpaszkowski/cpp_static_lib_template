@@ -2,30 +2,31 @@ cmake_minimum_required(VERSION 3.16)
 
 set(PROJECT_NAME cpp_static_lib_template)
 
-### PROJECT
-
+# PROJECT
 project(${PROJECT_NAME} VERSION 0.0.1 LANGUAGES CXX)
 
-# Global CMake variables
+# GLOBAL CMAKE VARIABLES
 set(CMAKE_CXX_STANDARD              17)
 set(CMAKE_CXX_STANDARD_REQUIRED     ON)
 set(CMAKE_CXX_EXTENSIONS            OFF)
 set(CMAKE_EXPORT_COMPILE_COMMANDS   ON)
 
-### MAIN_PROJECT CHECK
+# MAIN_PROJECT CHECK
 set(MAIN_PROJECT OFF)
 if (CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
     set(MAIN_PROJECT ON)
 endif()
 
 # OPTIONS
-
 option(ENABLE_WARNINGS              "Enable to add warnings to a target." ${MAIN_PROJECT})
 option(ENABLE_TESTING               "Enable a Unit Testing build."        ${MAIN_PROJECT})
 option(ENABLE_COVERAGE              "Enable a Code Coverage build."       ${MAIN_PROJECT})
 
-### CMAKE MODULES
+option(ENABLE_CLANG_TIDY            "Enable to add clang tidy."           ${MAIN_PROJECT})
+option(ENABLE_CLANG_FORMAT          "Enable to add clang-format."         ${MAIN_PROJECT})
+option(ENABLE_CPPCHECK              "Enable to add cppcheck."             ${MAIN_PROJECT})
 
+# CMAKE MODULES
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/)
 include(ConfigSafeGuards)
 include(Warnings)
@@ -34,8 +35,7 @@ include(FetchContent)
 include(Tools)
 include(LTO)
 
-### EXTERNAL LIBRARIES
-
+# EXTERNAL LIBRARIES
 FetchContent_Declare(
     fmt
     GIT_REPOSITORY https://github.com/fmtlib/fmt.git
@@ -43,12 +43,11 @@ FetchContent_Declare(
     GIT_SHALLOW TRUE)
 FetchContent_MakeAvailable(fmt)
 
-### SUB DIRECTORIES
+# SUBDIRECTORIES
 add_subdirectory(configured)
 add_subdirectory(src)
 
-### TESTS
-
+# TESTS
 if (ENABLE_TESTING)
     include(CTest)
     if (ENABLE_COVERAGE)
@@ -58,8 +57,7 @@ if (ENABLE_TESTING)
     add_subdirectory(tests)
 endif()
 
-### INSTALL TARGETS
-
+# INSTALL TARGETS
 install(TARGETS ${PROJECT_NAME}
         ARCHIVE DESTINATION lib
         LIBRARY DESTINATION lib)
