@@ -22,7 +22,7 @@ option(ENABLE_WARNINGS              "Enable to add warnings to a target." ${MAIN
 option(ENABLE_TESTING               "Enable a Unit Testing build."        ${MAIN_PROJECT})
 option(ENABLE_COVERAGE              "Enable a Code Coverage build."       ${MAIN_PROJECT})
 
-option(ENABLE_CLANG_TIDY            "Enable to add clang tidy."           ${MAIN_PROJECT})
+option(ENABLE_CLANG_TIDY            "Enable to add clang tidy."           OFF) # Have to be fixed
 option(ENABLE_CLANG_FORMAT          "Enable to add clang-format."         ${MAIN_PROJECT})
 option(ENABLE_CPPCHECK              "Enable to add cppcheck."             ${MAIN_PROJECT})
 
