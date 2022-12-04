@@ -20,9 +20,9 @@ endif()
 
 # OPTIONS
 
-option(ENABLE_WARNINGS              "Enable to add warnings to a target." ON)
-option(ENABLE_TESTING               "Enable a Unit Testing build."        ON)
-option(ENABLE_COVERAGE              "Enable a Code Coverage build."       OFF)
+option(ENABLE_WARNINGS              "Enable to add warnings to a target." ${MAIN_PROJECT})
+option(ENABLE_TESTING               "Enable a Unit Testing build."        ${MAIN_PROJECT})
+option(ENABLE_COVERAGE              "Enable a Code Coverage build."       ${MAIN_PROJECT})
 
 ### CMAKE MODULES
 

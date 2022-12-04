@@ -10,4 +10,4 @@ script:
   - cmake -H. -Bbuild
   - cmake --build build --config Debug --target coverage -j2
 after_success:
-  - coveralls --root . -E ".*gtest.*" -E ".*CMakeFiles.*" -E ".*_deps.*" -E ".*tests.*"
+  - bash <(curl -s https://codecov.io/bash)
