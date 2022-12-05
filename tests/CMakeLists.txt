@@ -9,7 +9,7 @@ FetchContent_MakeAvailable(googletest)
 
 add_executable(${TEST_MAIN} ${TEST_SOURCES})
 
-target_link_libraries(${TEST_MAIN} PUBLIC ${PROJECT_NAME}_lib)
+target_link_libraries(${TEST_MAIN} PUBLIC ${PROJECT_NAME})
 target_link_libraries(${TEST_MAIN} PRIVATE GTest::gtest_main)
 
 if (${ENABLE_WARNINGS})
