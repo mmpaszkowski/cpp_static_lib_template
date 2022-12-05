@@ -4,7 +4,7 @@
 [![codecov](https://codecov.io/gh/mmpaszkowski/cpp_static_lib_template/branch/master/graph/badge.svg?token=S2PIG8LUCW)](https://codecov.io/gh/mmpaszkowski/cpp_static_lib_template)
 
 ### Project structure
-```
+```shell
 .
 ├── cmake
 │   ├── AddGitSubmodule.cmake

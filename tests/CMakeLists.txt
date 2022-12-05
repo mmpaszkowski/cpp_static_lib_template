@@ -12,13 +12,13 @@ add_executable(${TEST_MAIN} ${TEST_SOURCES})
 target_link_libraries(${TEST_MAIN} PUBLIC ${PROJECT_NAME})
 target_link_libraries(${TEST_MAIN} PRIVATE GTest::gtest_main)
 
-if (${ENABLE_WARNINGS})
+if (${LIB_ENABLE_WARNINGS})
     target_set_warnings(TARGET ${TEST_MAIN} ENABLE ON AS_ERROR OFF)
 endif ()
 
 add_target_static_analyers(${TEST_MAIN})
 
-if (ENABLE_COVERAGE)
+if (LIB_ENABLE_COVERAGE)
     set(COVERAGE_MAIN "coverage")
     set(COVERAGE_EXCLUDES
             "${PROJECT_SOURCE_DIR}/app/*"

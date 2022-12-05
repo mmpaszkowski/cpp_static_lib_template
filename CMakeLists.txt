@@ -18,13 +18,13 @@ if (CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
 endif()
 
 # OPTIONS
-option(ENABLE_WARNINGS              "Enable to add warnings to a target." ${MAIN_PROJECT})
-option(ENABLE_TESTING               "Enable a Unit Testing build."        ${MAIN_PROJECT})
-option(ENABLE_COVERAGE              "Enable a Code Coverage build."       ${MAIN_PROJECT})
+option(LIB_ENABLE_WARNINGS              "Enable to add warnings to a target." ${MAIN_PROJECT})
+option(LIB_ENABLE_TESTING               "Enable a Unit Testing build."        ${MAIN_PROJECT})
+option(LIB_ENABLE_COVERAGE              "Enable a Code Coverage build."       ${MAIN_PROJECT})
 
-option(ENABLE_CLANG_TIDY            "Enable to add clang tidy."           OFF) # Have to be fixed
-option(ENABLE_CLANG_FORMAT          "Enable to add clang-format."         ${MAIN_PROJECT})
-option(ENABLE_CPPCHECK              "Enable to add cppcheck."             ${MAIN_PROJECT})
+option(LIB_ENABLE_CLANG_TIDY            "Enable to add clang tidy."           OFF) # Have to be fixed
+option(LIB_ENABLE_CLANG_FORMAT          "Enable to add clang-format."         ${MAIN_PROJECT})
+option(LIB_ENABLE_CPPCHECK              "Enable to add cppcheck."             ${MAIN_PROJECT})
 
 # CMAKE MODULES
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/)
@@ -48,9 +48,9 @@ add_subdirectory(configured)
 add_subdirectory(src)
 
 # TESTS
-if (ENABLE_TESTING)
+if (LIB_ENABLE_TESTING)
     include(CTest)
-    if (ENABLE_COVERAGE)
+    if (LIB_ENABLE_COVERAGE)
         include(CodeCoverage)
         append_coverage_compiler_flags()
     endif()

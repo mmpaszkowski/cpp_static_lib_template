@@ -1,6 +1,6 @@
 function(target_set_warnings)
 
-    if(NOT ENABLE_WARNINGS)
+    if(NOT LIB_ENABLE_WARNINGS)
         return()
     endif()
 

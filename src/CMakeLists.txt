@@ -20,7 +20,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC ${LIBRARY_INCLUDES})
 
 add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 
-if (${ENABLE_WARNINGS})
+if (${LIB_ENABLE_WARNINGS})
     target_set_warnings(TARGET ${PROJECT_NAME} ENABLE ON AS_ERROR OFF)
 endif ()
 
