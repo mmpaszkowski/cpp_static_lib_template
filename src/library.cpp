@@ -3,7 +3,7 @@
 #include <fmt/color.h>
 #include <cpp_static_lib_template/config.h>
 
-namespace mgn
+namespace lib
 {
     void hello()
     {

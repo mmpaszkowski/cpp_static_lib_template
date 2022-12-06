@@ -3,10 +3,10 @@
 
 TEST(cpp_template, mul)
 {
-    GTEST_ASSERT_EQ(mgn::multiply(3.0, 4.0), 12.0);
+    GTEST_ASSERT_EQ(lib::multiply(3.0, 4.0), 12.0);
 }
 
 TEST(cpp_template, hello)
 {
-    mgn::hello();
+    lib::hello();
 }
