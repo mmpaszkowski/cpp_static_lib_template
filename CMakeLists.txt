@@ -12,19 +12,19 @@ set(CMAKE_CXX_EXTENSIONS            OFF)
 set(CMAKE_EXPORT_COMPILE_COMMANDS   ON)
 
 # MAIN_PROJECT CHECK
-set(MAIN_PROJECT OFF)
+set(LIB_MAIN_PROJECT OFF)
 if (CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
-    set(MAIN_PROJECT ON)
+    set(LIB_MAIN_PROJECT ON)
 endif()
 
 # OPTIONS
-option(LIB_ENABLE_WARNINGS              "Enable to add warnings to a target." ${MAIN_PROJECT})
-option(LIB_ENABLE_TESTING               "Enable a Unit Testing build."        ${MAIN_PROJECT})
-option(LIB_ENABLE_COVERAGE              "Enable a Code Coverage build."       ${MAIN_PROJECT})
+option(LIB_ENABLE_WARNINGS              "Enable to add warnings to a target." ${LIB_MAIN_PROJECT})
+option(LIB_ENABLE_TESTING               "Enable a Unit Testing build."        ${LIB_MAIN_PROJECT})
+option(LIB_ENABLE_COVERAGE              "Enable a Code Coverage build."       ${LIB_MAIN_PROJECT})
 
 option(LIB_ENABLE_CLANG_TIDY            "Enable to add clang tidy."           OFF) # Have to be fixed
-option(LIB_ENABLE_CLANG_FORMAT          "Enable to add clang-format."         ${MAIN_PROJECT})
-option(LIB_ENABLE_CPPCHECK              "Enable to add cppcheck."             ${MAIN_PROJECT})
+option(LIB_ENABLE_CLANG_FORMAT          "Enable to add clang-format."         ${LIB_MAIN_PROJECT})
+option(LIB_ENABLE_CPPCHECK              "Enable to add cppcheck."             ${LIB_MAIN_PROJECT})
 
 # CMAKE MODULES
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/)
