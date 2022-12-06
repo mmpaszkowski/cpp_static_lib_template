@@ -3,14 +3,19 @@
 #include <fmt/color.h>
 #include <cpp_static_lib_template/config.h>
 
+namespace mgn
+{
+    void hello()
+    {
+        fmt::print(fg(fmt::color::white), project_name);
+        fmt::print(fg(fmt::color::green), " v");
+        fmt::print(fg(fmt::color::green), project_version);
+        fmt::print(fg(fmt::color::green), "\n");
+    }
 
-void hello() {
-    fmt::print(fg(fmt::color::white), project_name);
-    fmt::print(fg(fmt::color::green), " v");
-    fmt::print(fg(fmt::color::green), project_version);
-    fmt::print(fg(fmt::color::green), "\n");
+    double multiply(double a, double b)
+    {
+        return a * b;
+    }
 }
 
-double multiply(double a, double b) {
-    return a * b;
-}

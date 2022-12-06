@@ -1,8 +1,11 @@
 #ifndef CPP_STATIC_LIB_TEMPLATE_LIBRARY_H
 #define CPP_STATIC_LIB_TEMPLATE_LIBRARY_H
 
-void hello();
+namespace mgn
+{
+    void hello();
+    double multiply(double a, double b);
+}
 
-double multiply(double a, double b);
 
 #endif //CPP_STATIC_LIB_TEMPLATE_LIBRARY_H
