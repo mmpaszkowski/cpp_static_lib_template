@@ -1,7 +1,8 @@
 #include "../include/cpp_static_lib_template/library.h"
 
 #include <fmt/color.h>
-#include <config.h>
+#include <cpp_static_lib_template/config.h>
+
 
 void hello() {
     fmt::print(fg(fmt::color::white), project_name);
