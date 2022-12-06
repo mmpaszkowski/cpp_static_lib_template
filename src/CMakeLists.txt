@@ -10,18 +10,18 @@ set(LIBRARY_INCLUDES
     "${CMAKE_BINARY_DIR}/configured_files/include")
 
 
-add_library(${PROJECT_NAME} STATIC
+add_library(${LIB_PROJECT_NAME} STATIC
     ${LIBRARY_SOURCES}
     ${LIBRARY_HEADERS})
 
-target_link_libraries(${PROJECT_NAME} PRIVATE fmt::fmt)
+target_link_libraries(${LIB_PROJECT_NAME} PRIVATE fmt::fmt)
 
-target_include_directories(${PROJECT_NAME} PUBLIC ${LIBRARY_INCLUDES})
+target_include_directories(${LIB_PROJECT_NAME} PUBLIC ${LIBRARY_INCLUDES})
 
-add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
+add_library(${LIB_PROJECT_NAME}::${LIB_PROJECT_NAME} ALIAS ${LIB_PROJECT_NAME})
 
 if (${LIB_ENABLE_WARNINGS})
-    target_set_warnings(TARGET ${PROJECT_NAME} ENABLE ON AS_ERROR OFF)
+    target_set_warnings(TARGET ${LIB_PROJECT_NAME} ENABLE ON AS_ERROR OFF)
 endif ()
 
-add_target_static_analyers(${PROJECT_NAME})
+add_target_static_analyers(${LIB_PROJECT_NAME})

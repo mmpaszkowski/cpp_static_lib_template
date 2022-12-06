@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 3.16)
 
-set(PROJECT_NAME cpp_static_lib_template)
+set(LIB_PROJECT_NAME cpp_static_lib_template)
 
 # PROJECT
-project(${PROJECT_NAME} VERSION 0.0.1 LANGUAGES CXX)
+project(${LIB_PROJECT_NAME} VERSION 0.0.1 LANGUAGES CXX)
 
 # GLOBAL CMAKE VARIABLES
 set(CMAKE_CXX_STANDARD              17)
@@ -58,6 +58,6 @@ if (LIB_ENABLE_TESTING)
 endif()
 
 # INSTALL TARGETS
-install(TARGETS ${PROJECT_NAME}
+install(TARGETS ${LIB_PROJECT_NAME}
         ARCHIVE DESTINATION lib
         LIBRARY DESTINATION lib)

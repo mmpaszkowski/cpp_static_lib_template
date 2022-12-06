@@ -1,4 +1,4 @@
-set(TEST_MAIN ${PROJECT_NAME}_unit_tests)
+set(TEST_MAIN ${LIB_PROJECT_NAME}_unit_tests)
 set(TEST_SOURCES library.cpp)
 
 FetchContent_Declare(
@@ -9,7 +9,7 @@ FetchContent_MakeAvailable(googletest)
 
 add_executable(${TEST_MAIN} ${TEST_SOURCES})
 
-target_link_libraries(${TEST_MAIN} PUBLIC ${PROJECT_NAME})
+target_link_libraries(${TEST_MAIN} PUBLIC ${LIB_PROJECT_NAME})
 target_link_libraries(${TEST_MAIN} PRIVATE GTest::gtest_main)
 
 if (${LIB_ENABLE_WARNINGS})
