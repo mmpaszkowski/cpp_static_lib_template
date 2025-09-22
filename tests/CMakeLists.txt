@@ -29,7 +29,8 @@ if (LIB_ENABLE_COVERAGE)
             "${PROJECT_SOURCE_DIR}/cmake/*"
             "${PROJECT_SOURCE_DIR}/docs/*"
             "${PROJECT_SOURCE_DIR}/external/*"
-            "${PROJECT_SOURCE_DIR}/tests/*"
+            "${PROJECT_BINARY_DIR}/_deps/*" # exclude vendored deps (e.g., googletest)
+            "${PROJECT_BINARY_DIR}/CMakeFiles/*" # exclude CMake compiler id and build stubs
             "/usr/include/*")
 
     # Produce HTML report under build/coverage and Cobertura XML at build/coverage/coverage.cobertura.xml
