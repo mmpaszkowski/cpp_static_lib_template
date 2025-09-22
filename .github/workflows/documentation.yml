@@ -2,33 +2,29 @@ name: Documentation
 
 on:
   push:
-    tags:
-      - "*"
-    branches: [ main, master ]
+    branches: [ main, master, dev ]
+  pull_request:
+    branches: [ main, master, dev ]
 
 jobs:
-  build:
-    name: Build and publish documentation
+  docs:
+    name: Build Doxygen and upload artifact
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
-      - name: Install Docs
+      - uses: actions/checkout@v4
+      - name: Install Doxygen
         run: |
-          sudo apt-get install doxygen
-          pip install jinja2 Pygments
-      - name: prepare
-        run: |
-          make prepare
-      - name: configure
-        run: |
-          cmake -H. -Bbuild -G "Unix Makefiles" -DCMAKE_BUILD_TYPE="Debug"
-      - name: building
-        run: |
-          cmake --build build --config Debug --target docs -j4
-      - name: Deploy to GitHub Pages
-        uses: Cecilapp/GitHub-Pages-deploy@v3
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          sudo apt-get update
+          sudo apt-get install -y doxygen
+      - name: Configure (CMake)
+        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+      - name: Build docs target
+        run: cmake --build build --target docs -j 2
+      - name: Upload Doxygen HTML artifact
+        uses: actions/upload-artifact@v4
         with:
-          build_dir: ./docs/html
+          name: doxygen-html
+          path: |
+            docs/html/**
+          if-no-files-found: error
+          retention-days: 14
