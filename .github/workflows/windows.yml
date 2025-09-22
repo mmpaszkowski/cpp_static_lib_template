@@ -10,15 +10,16 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: prepare
+      - uses: actions/checkout@v4
+      - name: Configure (CMake)
+        shell: pwsh
         run: |
-          make prepare
-      - name: configure
+          cmake -S . -B build -A x64 -DLIB_ENABLE_TESTING=ON
+      - name: Build
+        shell: pwsh
         run: |
-          cmake -H"." -Bbuild -T host=x86 -A x64 -DCMAKE_BUILD_TYPE="Debug"
-      - name: building and testing
+          cmake --build build --config Debug -- /m
+      - name: Test
+        shell: pwsh
         run: |
-          cmake --build build --config Debug
-          cd build
-          ctest .
+          ctest --test-dir build -C Debug --output-on-failure -j 2
