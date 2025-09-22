@@ -23,6 +23,23 @@ add_executable(${TEST_MAIN} ${TEST_SOURCES})
 target_link_libraries(${TEST_MAIN} PUBLIC ${LIB_PROJECT_NAME})
 target_link_libraries(${TEST_MAIN} PRIVATE GTest::gtest_main)
 
+# Silence common Windows CRT deprecation and min/max macro warnings
+target_compile_definitions(${TEST_MAIN} PRIVATE _CRT_SECURE_NO_WARNINGS _SILENCE_ALL_CXX20_DEPRECATION_WARNINGS NOMINMAX WIN32_LEAN_AND_MEAN)
+
+# Mark GTest/GMock headers as SYSTEM on the tests target to reduce noise
+if(TARGET GTest::gtest)
+    get_target_property(GTEST_INCLUDES GTest::gtest INTERFACE_INCLUDE_DIRECTORIES)
+    if(GTEST_INCLUDES)
+        target_include_directories(${TEST_MAIN} SYSTEM PRIVATE ${GTEST_INCLUDES})
+    endif()
+endif()
+if(TARGET GTest::gmock)
+    get_target_property(GMOCK_INCLUDES GTest::gmock INTERFACE_INCLUDE_DIRECTORIES)
+    if(GMOCK_INCLUDES)
+        target_include_directories(${TEST_MAIN} SYSTEM PRIVATE ${GMOCK_INCLUDES})
+    endif()
+endif()
+
 # Register tests with CTest (GoogleTest discovery)
 include(GoogleTest)
 gtest_discover_tests(${TEST_MAIN})
