@@ -1,0 +1,35 @@
+# Doxygen configuration for cpp_static_lib_template
+
+# Project
+PROJECT_NAME           = "@PROJECT_NAME@"
+PROJECT_NUMBER         = "@PROJECT_VERSION@"
+OUTPUT_DIRECTORY       = .
+CREATE_SUBDIRS         = NO
+OPTIMIZE_OUTPUT_FOR_C  = NO
+OPTIMIZE_OUTPUT_FOR_CPLUSPLUS = YES
+MARKDOWN_SUPPORT       = YES
+INLINE_SOURCES         = NO
+EXTRACT_ALL            = NO
+EXTRACT_PRIVATE        = NO
+EXTRACT_STATIC         = NO
+JAVADOC_AUTOBRIEF      = YES
+CASE_SENSE_NAMES       = NO
+GENERATE_HTML          = YES
+GENERATE_LATEX         = NO
+GENERATE_XML           = NO
+QUIET                  = YES
+WARN_IF_UNDOCUMENTED   = NO
+
+# Inputs
+INPUT                  = @PROJECT_SOURCE_DIR@/include \
+                         @PROJECT_SOURCE_DIR@/src
+FILE_PATTERNS          = *.h *.hpp *.hh *.cpp
+RECURSIVE              = YES
+EXCLUDE_PATTERNS       = */_deps/* */CMakeFiles/*
+
+# HTML
+HTML_OUTPUT            = html
+HTML_COLORSTYLE_HUE    = 220
+HTML_COLORSTYLE_SAT    = 100
+HTML_COLORSTYLE_GAMMA  = 80
+

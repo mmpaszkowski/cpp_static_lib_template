@@ -34,6 +34,7 @@ include(AddGitSubmodule)
 include(FetchContent)
 include(Tools)
 include(LTO)
+include(Docs)
 
 # EXTERNAL LIBRARIES
 FetchContent_Declare(

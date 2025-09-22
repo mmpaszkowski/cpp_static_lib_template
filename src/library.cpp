@@ -1,3 +1,8 @@
+/**
+ * @file library.cpp
+ * @brief Implementation of the public API declared in library.h
+ */
+
 #include "../include/cpp_static_lib_template/library.h"
 
 #include <fmt/color.h>
@@ -13,4 +18,3 @@ namespace lib
         fmt::print(fg(fmt::color::green), "\n");
     }
 }
-
