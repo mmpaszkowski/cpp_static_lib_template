@@ -14,7 +14,7 @@ jobs:
       - name: Configure (CMake)
         shell: pwsh
         run: |
-          cmake -S . -B build -A x64 -DLIB_ENABLE_TESTING=ON
+          cmake -S . -B build -A x64 -DLIB_ENABLE_TESTING=ON -DLIB_ENABLE_COVERAGE=OFF
       - name: Build
         shell: pwsh
         run: |
