@@ -19,7 +19,7 @@ jobs:
           make prepare
       - name: configure
         run: |
-          cmake -H. -Bbuild -DCMAKE_BUILD_TYPE=Debug -DENABLE_COVERAGE=On
+          cmake -H. -Bbuild -DCMAKE_BUILD_TYPE=Debug
       - name: building and testing
         run: |
           cmake --build build --config Debug --target coverage -j4
@@ -37,6 +37,14 @@ jobs:
           indicators: true
           output: both
           thresholds: '60 80'
+      - name: Upload Coverage Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: |
+            build/coverage/**
+          if-no-files-found: error
+          retention-days: 7
       - name: Add Coverage PR Comment
         uses: marocchino/sticky-pull-request-comment@v2
         if: github.event_name == 'pull_request'
