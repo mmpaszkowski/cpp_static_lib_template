@@ -44,6 +44,15 @@ FetchContent_Declare(
     GIT_SHALLOW TRUE)
 FetchContent_MakeAvailable(fmt)
 
+# Reduce warnings from third-party dependency builds on MSVC/others
+if(TARGET fmt)
+    if(MSVC)
+        target_compile_options(fmt PRIVATE /W0)
+    else()
+        target_compile_options(fmt PRIVATE -w)
+    endif()
+endif()
+
 # SUBDIRECTORIES
 add_subdirectory(configured)
 add_subdirectory(src)

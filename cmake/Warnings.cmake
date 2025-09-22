@@ -24,6 +24,8 @@ function(target_set_warnings)
         /w44062 # enumerator 'identifier' in a switch of enum 'enumeration' is not handled
         /w44242 # 'identifier': conversion from 'type1' to 'type2', possible loss of data
         /permissive- # standards conformance mode for MSVC compiler.
+        # Treat external headers (included with <...>) as system and silence their warnings
+        /experimental:external /external:anglebrackets /external:W0
     )
 
     set(CLANG_WARNINGS

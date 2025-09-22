@@ -7,6 +7,17 @@ FetchContent_Declare(
         GIT_TAG release-1.12.1)
 FetchContent_MakeAvailable(googletest)
 
+# Suppress warnings from googletest/googlemock builds to keep CI logs clean
+foreach(_t IN ITEMS gtest gtest_main gmock gmock_main)
+    if(TARGET ${_t})
+        if(MSVC)
+            target_compile_options(${_t} PRIVATE /W0)
+        else()
+            target_compile_options(${_t} PRIVATE -w)
+        endif()
+    endif()
+endforeach()
+
 add_executable(${TEST_MAIN} ${TEST_SOURCES})
 
 target_link_libraries(${TEST_MAIN} PUBLIC ${LIB_PROJECT_NAME})
