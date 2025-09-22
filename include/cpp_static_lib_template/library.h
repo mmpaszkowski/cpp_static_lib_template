@@ -3,8 +3,7 @@
 
 namespace lib
 {
-    void hello();
-    double multiply(double a, double b);
+    void log_version();
 }
 
 #endif //CPP_STATIC_LIB_TEMPLATE_LIBRARY_H
