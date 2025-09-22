@@ -33,8 +33,11 @@ if (LIB_ENABLE_COVERAGE)
             "/usr/include/*")
 
     # Produce HTML report under build/coverage and Cobertura XML at build/coverage/coverage.cobertura.xml
+    # Use gcovr's --xml=FILE form to avoid argument splitting issues.
     # Tests are executed via ctest to ensure proper discovery.
-    set(GCOVR_ADDITIONAL_ARGS "--xml coverage/coverage.cobertura.xml")
+    # Use explicit separate args for broader gcovr compatibility (older/newer):
+    #   --xml enables Cobertura output, and --output selects the file.
+    set(GCOVR_ADDITIONAL_ARGS --xml --output coverage/coverage.cobertura.xml)
     setup_target_for_coverage_gcovr_html(
             NAME ${COVERAGE_MAIN}
             EXECUTABLE ctest
