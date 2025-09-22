@@ -27,9 +27,14 @@ if (LIB_ENABLE_COVERAGE)
             "${PROJECT_SOURCE_DIR}/external/*"
             "${PROJECT_SOURCE_DIR}/tests/*"
             "/usr/include/*")
-    setup_target_for_coverage_lcov(
+
+    # Produce HTML report under build/coverage and Cobertura XML at build/coverage/coverage.cobertura.xml
+    # Tests are executed via ctest to ensure proper discovery.
+    set(GCOVR_ADDITIONAL_ARGS "--xml coverage/coverage.cobertura.xml")
+    setup_target_for_coverage_gcovr_html(
             NAME ${COVERAGE_MAIN}
-            EXECUTABLE ${TEST_MAIN}
+            EXECUTABLE ctest
+            EXECUTABLE_ARGS -j 2 --output-on-failure
             DEPENDENCIES ${TEST_MAIN}
     )
 endif()
