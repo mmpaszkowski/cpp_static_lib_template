@@ -12,6 +12,10 @@ add_executable(${TEST_MAIN} ${TEST_SOURCES})
 target_link_libraries(${TEST_MAIN} PUBLIC ${LIB_PROJECT_NAME})
 target_link_libraries(${TEST_MAIN} PRIVATE GTest::gtest_main)
 
+# Register tests with CTest (GoogleTest discovery)
+include(GoogleTest)
+gtest_discover_tests(${TEST_MAIN})
+
 if (${LIB_ENABLE_WARNINGS})
     target_set_warnings(TARGET ${TEST_MAIN} ENABLE ON AS_ERROR OFF)
 endif ()
