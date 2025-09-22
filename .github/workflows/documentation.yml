@@ -17,7 +17,11 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y doxygen
       - name: Configure (CMake)
-        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+        run: |
+          cmake -S . -B build \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DLIB_ENABLE_TESTING=OFF \
+            -DLIB_ENABLE_COVERAGE=OFF
       - name: Build docs target
         run: cmake --build build --target docs -j 2
       - name: Upload Doxygen HTML artifact
