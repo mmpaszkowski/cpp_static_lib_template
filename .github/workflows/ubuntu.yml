@@ -10,21 +10,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: install
+      - uses: actions/checkout@v4
+      - name: Install coverage tool
+        run: pip3 install --user -U gcovr
+      - name: Configure (CMake)
+        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug -DLIB_ENABLE_TESTING=ON -DLIB_ENABLE_COVERAGE=ON
+      - name: Build coverage target and run tests
         run: |
-          pip install --user -U gcovr
-      - name: prepare
-        run: |
-          make prepare
-      - name: configure
-        run: |
-          cmake -H. -Bbuild -DCMAKE_BUILD_TYPE=Debug
-      - name: building and testing
-        run: |
-          cmake --build build --config Debug --target coverage -j4
-          cd build
-          ctest .
+          cmake --build build --target coverage -j 2
+          ctest --test-dir build -j 2 --output-on-failure
       - name: Upload Coverage Artifact
         uses: actions/upload-artifact@v4
         with:
