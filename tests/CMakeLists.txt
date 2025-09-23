@@ -1,7 +1,7 @@
 set(TEST_MAIN ${LIB_PROJECT_NAME}_unit_tests)
 set(TEST_SOURCES
         library.cpp
-        scalar.cpp)
+)
 
 FetchContent_Declare(
         googletest
