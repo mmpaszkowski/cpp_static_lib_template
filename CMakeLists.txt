@@ -60,10 +60,6 @@ add_subdirectory(src)
 # TESTS
 if (LIB_ENABLE_TESTING)
     include(CTest)
-    if (LIB_ENABLE_COVERAGE)
-        include(CodeCoverage)
-        append_coverage_compiler_flags()
-    endif()
     add_subdirectory(tests)
 endif()
 

@@ -1,0 +1,37 @@
+{
+  "name": "cpp_static_lib_template",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+  "remoteUser": "vscode",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-vscode.cpptools",
+        "ms-vscode.cmake-tools",
+        "twxs.cmake",
+        "eamodio.gitlens"
+      ],
+      "settings": {
+        "C_Cpp.clang_format_style": "file",
+        "cmake.configureOnOpen": true,
+        "cmake.generator": "Ninja",
+        "cmake.buildDirectory": "${workspaceFolder}/build",
+        "cmake.configureSettings": {
+          "LIB_ENABLE_TESTING": "ON",
+          "CMAKE_BUILD_TYPE": "Debug"
+        }
+      }
+    }
+  },
+  "containerEnv": {
+    "CMAKE_BUILD_PARALLEL_LEVEL": "4",
+    "CCACHE_DIR": "/home/vscode/.ccache"
+  },
+  "mounts": [
+    "source=ccache,target=/home/vscode/.ccache,type=volume"
+  ],
+  "postCreateCommand": "cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug -DLIB_ENABLE_TESTING=ON"
+}
+

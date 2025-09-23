@@ -1,22 +1,13 @@
 set(TEST_MAIN ${LIB_PROJECT_NAME}_unit_tests)
-set(TEST_SOURCES library.cpp)
+set(TEST_SOURCES
+        library.cpp
+        scalar.cpp)
 
 FetchContent_Declare(
         googletest
         GIT_REPOSITORY https://github.com/google/googletest.git
         GIT_TAG release-1.12.1)
 FetchContent_MakeAvailable(googletest)
-
-# Suppress warnings from googletest/googlemock builds to keep CI logs clean
-foreach(_t IN ITEMS gtest gtest_main gmock gmock_main)
-    if(TARGET ${_t})
-        if(MSVC)
-            target_compile_options(${_t} PRIVATE /W0)
-        else()
-            target_compile_options(${_t} PRIVATE -w)
-        endif()
-    endif()
-endforeach()
 
 add_executable(${TEST_MAIN} ${TEST_SOURCES})
 
@@ -53,6 +44,7 @@ add_target_static_analyers(${TEST_MAIN})
 if (LIB_ENABLE_COVERAGE)
     set(COVERAGE_MAIN "coverage")
     set(COVERAGE_EXCLUDES
+            "${PROJECT_SOURCE_DIR}/tests/*" # exclude test sources from coverage
             "${PROJECT_SOURCE_DIR}/app/*"
             "${PROJECT_SOURCE_DIR}/cmake/*"
             "${PROJECT_SOURCE_DIR}/docs/*"
@@ -66,7 +58,9 @@ if (LIB_ENABLE_COVERAGE)
     # Tests are executed via ctest to ensure proper discovery.
     # Use explicit separate args for broader gcovr compatibility (older/newer):
     #   --xml enables Cobertura output, and --output selects the file.
-    set(GCOVR_ADDITIONAL_ARGS --xml --output coverage/coverage.cobertura.xml)
+
+    set(GCOVR_ADDITIONAL_ARGS --xml --output coverage/coverage.cobertura.xml
+            --exclude-throw-branches --exclude-unreachable-branches)
     setup_target_for_coverage_gcovr_html(
             NAME ${COVERAGE_MAIN}
             EXECUTABLE ctest
